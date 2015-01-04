@@ -7,12 +7,14 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-ctrl_funcs = {"infrared":"ir"}
+ctrl_funcs = {}
 
 @app.route('/')
 def show_index():
     """ Show an index of available bhbctrl functionality. """
     return render_template("index.html", appname="bhbctrl", ctrl_funcs=ctrl_funcs)
+
+from infrared import *
 
 if __name__ == "__main__":
     app.run()
