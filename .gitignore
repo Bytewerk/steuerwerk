@@ -1,0 +1,8 @@
+*
+.*
+!.gitignore
+!Readme.md
+!*.py
+!*.html
+!templates/
+!static/
