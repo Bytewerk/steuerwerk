@@ -2,9 +2,15 @@
 <html>
   <head>
     <title>{{appname}}</title>
+    <link href="static/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <h1>{{appname}}</title>
     <h2>Bytewerk house bus control</h2>
+    <ul>
+      {% for key,value in ctrl_funcs.items() %}
+      <li><a href="funcs/{{value}}">{{key}}</a></li>
+      {% endfor %}
+    </ul>
   </body>
 </html>
