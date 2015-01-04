@@ -4,5 +4,6 @@
 !Readme.md
 !*.py
 !*.html
+!*.css
 !templates/
 !static/
