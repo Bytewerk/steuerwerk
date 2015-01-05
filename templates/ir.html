@@ -11,7 +11,7 @@
 			{% for name,cmd in commands.items() %}
 				<form method="post">
 					<input type="hidden" name="cmd" value="{{cmd}}" />
-					<input type="submit" value="{{name}}" formaction="/ir" />
+					<input type="submit" class="button" value="{{name}}" formaction="/ir" />
 				</form>
 			{% endfor %}
 		{% endfor %}

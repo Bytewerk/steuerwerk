@@ -5,11 +5,10 @@
     <link href="static/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>{{appname}}</title>
-    <h2>Bytewerk house bus control</h2>
+    <h1>Bytewerk house bus control</h1>
     <ul>
       {% for key,value in ctrl_funcs.items() %}
-      <li><a href="/{{value}}">{{key}}</a></li>
+      <li class="nobullets" ><a class="button" href="/{{value}}">{{key}}</a></li>
       {% endfor %}
     </ul>
   </body>
