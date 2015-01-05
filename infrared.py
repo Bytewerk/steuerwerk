@@ -8,24 +8,26 @@ from bhbctrl import app, ctrl_funcs
 
 commands = {"asdf":"uiae"}
 devices = {
-    "Amplifier": [
-        ("1","asdf"),
-        ("2","asdf"),
-        ("3","asdf"),
-        ("4","asdf"),
-        ("5","asdf"),
-        ("6","asdf")
-    ],
-    "Projector":[
-        ("abcd","efgh")
-    ]
+    "Amplifier": {
+        "1":"asdf",
+        "2":"asdf",
+        "3":"asdf",
+        "4":"asdf",
+        "5":"asdf",
+        "6":"asdf"
+    },
+    "Projector":{
+        "abcd":"efgh"
+    }
 }
 
 ctrl_funcs["send ir commands"] = "ir"
-@app.route('/ir', methods=['GET','POST'])
-def show_ir():
-    if request.form:
-        cmd = list(request.form)[0]
+@app.route('/ir/', methods=['GET'])
+@app.route('/ir/<device>', methods=['POST'])
+def show_ir(device=None):
+    if request.form and device:
+        name = request.form['cmd']
+        cmd = devices[device][name]
         send_cmd(cmd)
     return render_template("ir.html", devices = devices)
 
