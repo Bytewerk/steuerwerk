@@ -8,12 +8,17 @@
 		<h1>Send IR commands</h1>
 		{% for device,commands in devices.items() %}
 			<h2>{{device}}</h2>
-			{% for name,cmd in commands.items() %}
+			<form method="POST" target="">
+			{% for name,cmd in commands %}
+				<!--
 				<form method="post">
 					<input type="hidden" name="cmd" value="{{cmd}}" />
 					<input type="submit" value="{{name}}" formaction="/ir" />
 				</form>
+				-->
+				<input type="submit" name="{{cmd}}" value="{{name}}" />
 			{% endfor %}
+			</form>
 		{% endfor %}
 	</body>
 </html>
