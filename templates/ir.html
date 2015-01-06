@@ -6,10 +6,10 @@
 	</head>
 	<body>
 		<h1>Send IR commands</h1>
-		{% for device,commands in devices.items() %}
+		{% for device,attributes in devices.items() %}
 			<h2>{{device}}</h2>
 			<form method="POST" action="/ir/{{device}}" target=".">
-			{% for name in commands.keys() %}
+			{% for name in attributes['commands'].keys() %}
 				<!--
 				<form method="post">
 					<input type="hidden" name="cmd" value="{{cmd}}" />
