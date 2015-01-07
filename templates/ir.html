@@ -5,15 +5,17 @@
 		<link rel="stylesheet" type="text/css" href="/static/style.css" />
 	</head>
 	<body>
-		<h1>Send IR commands</h1>
-		{% for device,commands in devices.items() %}
-			<h2>{{device}}</h2>
-			{% for name,cmd in commands.items() %}
-				<form method="post">
-					<input type="hidden" name="cmd" value="{{cmd}}" />
-					<input type="submit" class="button" value="{{name}}" formaction="/ir" />
-				</form>
-			{% endfor %}
-		{% endfor %}
+                <div class="main-container">
+                        <h1>Send IR commands</h1>
+                        {% for device,commands in devices.items() %}
+                                <h2>{{device}}</h2>
+                                {% for name,cmd in commands.items() %}
+                                        <form method="post">
+                                                <input type="hidden" name="cmd" value="{{cmd}}" />
+                                                <input type="submit" class="button" value="{{name}}" formaction="/ir" />
+                                        </form>
+                                {% endfor %}
+                        {% endfor %}
+                </div>
 	</body>
 </html>
