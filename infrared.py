@@ -7,11 +7,21 @@ from flask import render_template, request
 from bhbctrl import app, ctrl_funcs
 import requests
 import json
+import collections
 
 CMDS_FILE = "ircodes.json"
 devices = None
 with open(CMDS_FILE) as cmds_file:
-    devices = json.load(cmds_file)
+    devices_raw = json.load(cmds_file, object_pairs_hook=collections.OrderedDict)
+
+    # flatten the multiple command dictionaries for every device into one
+    devices = {}
+    for key in devices_raw.keys():
+        devices[key] = {}
+        devices[key]["commands"] = {}
+        devices[key]["prot"] = devices_raw[key]["prot"]
+        for cmds in devices_raw[key]["commands"]:
+            devices[key]["commands"].update(cmds.items())
 
 ctrl_funcs["send ir commands"] = "ir"
 @app.route('/ir/', methods=['GET'])
@@ -22,7 +32,7 @@ def show_ir(device=None):
         cmd = devices[device]["commands"][name]
         prot = devices[device]["prot"]
         send_cmd(prot,cmd)
-    return render_template("ir.html", devices = devices)
+    return render_template("ir.html", devices = devices_raw)
 
 def send_cmd(prot,cmd):
     """ Send the specified infrared command. """
