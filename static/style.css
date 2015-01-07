@@ -1,4 +1,42 @@
+@font-face {
+  font-family: "Nova Square";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Nova Square"), local("NovaSquare"), url("NovaSquare.ttf");
+}
+
 html {
 	background: #202020;
 	color: #FFFFFF;
+}
+
+h1, h2, h3 {
+	font-family: "Nova Square";
+}
+
+a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.button {
+	padding: 0.4em 0.6em;
+	background: #3D4E8F;
+	border-radius: 0.2em;
+	border: solid 0.1em #566DC9;
+	color: #FFFFFF;
+}
+
+.button:hover {
+	background: #617BE3;
+}
+
+.nobullets {
+	list-style-type: none;
+}
+
+.main-container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 30em;
 }

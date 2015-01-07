@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="/static/style.css" />
 	</head>
 	<body>
+	<div class="main-container">
 		<h1>Send IR commands</h1>
 		{% for device,attributes in devices.items() %}
 			<h2>{{device}}</h2>
@@ -20,5 +21,6 @@
 			{% endfor %}
 			</form>
 		{% endfor %}
+		</div>
 	</body>
 </html>

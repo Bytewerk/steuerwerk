@@ -6,5 +6,6 @@
 !*.html
 !*.css
 !*.json
+!*.ttf
 !templates/
 !static/
