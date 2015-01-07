@@ -25,6 +25,8 @@ a {
 	border-radius: 0.2em;
 	border: solid 0.1em #566DC9;
 	color: #FFFFFF;
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
 }
 
 .button:hover {
