@@ -40,5 +40,5 @@ a {
 .main-container {
         margin-left: auto;
         margin-right: auto;
-        width: 30em;
+        max-width: 40em;
 }
