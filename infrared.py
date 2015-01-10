@@ -5,7 +5,8 @@ which in turn gives control over the amplifier, the video projector, etc…
 
 from flask import render_template, request
 from bhbctrl import app, ctrl_funcs
-import requests
+#import requests
+import socket
 import json
 import collections
 
@@ -36,6 +37,9 @@ def show_ir(device=None):
 
 def send_cmd(prot,cmd):
     """ Send the specified infrared command. """
-    r = requests.get("http://ir.bingo/ecmd?irmp send {} {} 00".format(prot,cmd))
+    with socket.create_connection(("ir.bingo",2701)) as sock:
+        cmd_str = "irmp send {} {} 00\n".format(prot,cmd)
+        sock.send(bytes(cmd_str,"utf-8"))
+    #r = requests.get("http://ir.bingo/ecmd?irmp send {} {} 00".format(prot,cmd))
     #print(r.url)
     #print("\033[32m>>> DEBUG\033[39m: command {} requested to be sent".format(cmd))
