@@ -11,8 +11,8 @@ ctrl_funcs = {}
 
 @app.route('/')
 def show_index():
-    """ Show an index of available bhbctrl functionality. """
-    return render_template("index.html", appname="bhbctrl", ctrl_funcs=ctrl_funcs)
+    """ Show an index of available steuerwerk functionality. """
+    return render_template("index.html", appname="steuerwerk", ctrl_funcs=ctrl_funcs)
 
 from infrared import *
 

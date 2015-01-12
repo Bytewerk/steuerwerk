@@ -4,7 +4,7 @@ which in turn gives control over the amplifier, the video projector, etc…
 """
 
 from flask import render_template, request
-from bhbctrl import app, ctrl_funcs
+from steuerwerk import app, ctrl_funcs
 #import requests
 import socket
 import json
