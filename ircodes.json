@@ -4,6 +4,9 @@
 		"dev":"6DD2",
 		"commands":[
 			{
+				"MAKE IT SO":""
+			},
+			{
 				"ON/OFF":"6DD2 0004",
 				"SLEEP":"6DD2 005D",
 				"DIMMER":"6DD2 0095"

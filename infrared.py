@@ -5,7 +5,6 @@ which in turn gives control over the amplifier, the video projector, etc…
 
 from flask import render_template, request
 from steuerwerk import app, ctrl_funcs
-#import requests
 import socket
 import json
 import collections
@@ -32,14 +31,22 @@ def show_ir(device=None):
         name = request.form['cmd']
         cmd = devices[device]["commands"][name]
         prot = devices[device]["prot"]
+        if name == "MAKE IT SO":
+            make_it_so()
         send_cmd(prot,cmd)
     return render_template("ir.html", devices = devices_raw)
+
+def make_it_so():
+    dev = devices["Amplifier"]
+    prot = dev["prot"]
+    cmds = dev["commands"]
+    send_cmd(prot, cmds["ON/OFF"])
+    send_cmd(prot, cmds["DVD"])
+    for i in range(15):
+        send_cmd(prot, cmds["VOLUME UP"])
 
 def send_cmd(prot,cmd):
     """ Send the specified infrared command. """
     with socket.create_connection(("ir.bingo",2701)) as sock:
         cmd_str = "irmp send {} {} 00\n".format(prot,cmd)
         sock.send(bytes(cmd_str,"utf-8"))
-    #r = requests.get("http://ir.bingo/ecmd?irmp send {} {} 00".format(prot,cmd))
-    #print(r.url)
-    #print("\033[32m>>> DEBUG\033[39m: command {} requested to be sent".format(cmd))
