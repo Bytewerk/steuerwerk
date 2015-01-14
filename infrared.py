@@ -25,7 +25,7 @@ with open(CMDS_FILE) as cmds_file:
 
 ctrl_funcs["send ir commands"] = "ir"
 @app.route('/ir/', methods=['GET'])
-@app.route('/ir/<device>', methods=['POST'])
+@app.route('/ir/<device>', methods=['GET','POST'])
 def show_ir(device=None):
     if request.form and device:
         name = request.form['cmd']
