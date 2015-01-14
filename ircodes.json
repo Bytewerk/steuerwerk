@@ -28,8 +28,8 @@
 			},
 			{
 				"GROUP":"6DD2 004A",
-				"PRESET -->":"6DD2 0000",
-				"PRESET <--":"6DD2 0001"
+				"PRESET ←":"6DD2 0001",
+				"PRESET →":"6DD2 0000"
 			},
 			{
 				"CD DISC":"6DD2 005C",
