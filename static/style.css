@@ -29,6 +29,10 @@ a {
 	margin-bottom: 0.2em;
 }
 
+noscript {
+	font-size: 0.8em;
+}
+
 .button:hover {
 	background: #617BE3;
 }
