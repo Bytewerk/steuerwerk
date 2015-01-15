@@ -20,7 +20,6 @@ function initButtons(){
 	var forms = document.getElementsByTagName("form");
 	for(var f=0; f<forms.length; ++f){
 		var form = forms[f];
-		console.log(form);
 		var buttons = form.getElementsByClassName("button");
 		for(var i=0; i<buttons.length; ++i){
 			var button = buttons[i];
