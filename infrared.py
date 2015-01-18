@@ -33,20 +33,18 @@ def show_ir(device=None):
         prot = devices[device]["prot"]
         if name == "MAKE IT SO":
             make_it_so()
-        send_cmd(prot,cmd)
+        send_cmds(prot,cmd)
     return render_template("ir.html", devices = devices_raw)
 
 def make_it_so():
     dev = devices["Amplifier"]
     prot = dev["prot"]
     cmds = dev["commands"]
-    send_cmd(prot, cmds["ON/OFF"])
-    send_cmd(prot, cmds["DVD"])
-    for i in range(15):
-        send_cmd(prot, cmds["VOLUME UP"])
+    send_cmds(prot, [cmds["ON/OFF"],cmds["DVD"]]+[cmds["VOLUME UP"]]*15)
 
-def send_cmd(prot,cmd):
-    """ Send the specified infrared command. """
+def send_cmds(prot,*cmds):
+    """ Send the specified infrared commands. """
     with socket.create_connection(("ir.bingo",2701)) as sock:
-        cmd_str = "irmp send {} {} 00\n".format(prot,cmd)
-        sock.send(bytes(cmd_str,"utf-8"))
+        for cmd in cmds:
+            cmd_str = "irmp send {} {} 00\n".format(prot,cmd)
+            sock.send(bytes(cmd_str,"utf-8"))
