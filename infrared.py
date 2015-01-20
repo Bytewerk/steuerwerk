@@ -8,6 +8,9 @@ from steuerwerk import app, ctrl_funcs
 import socket
 import json
 import collections
+import queue
+import threading
+import time
 
 CMDS_FILE = "ircodes.json"
 devices = None
@@ -33,18 +36,40 @@ def show_ir(device=None):
         prot = devices[device]["prot"]
         if name == "MAKE IT SO":
             make_it_so()
-        send_cmds(prot,cmd)
+        else:
+            enqueue_cmds(prot,cmd)
     return render_template("ir.html", devices = devices_raw)
 
 def make_it_so():
     dev = devices["Amplifier"]
     prot = dev["prot"]
     cmds = dev["commands"]
-    send_cmds(prot, [cmds["ON/OFF"],cmds["DVD"]]+[cmds["VOLUME UP"]]*15)
+    enqueue_cmds(prot, cmds["ON/OFF"], cmds["DVD"], *[cmds["VOLUME UP"]]*15)
 
-def send_cmds(prot,*cmds):
+
+cmd_queue = queue.Queue()
+
+def enqueue_cmds(prot,*cmds):
     """ Send the specified infrared commands. """
-    with socket.create_connection(("ir.bingo",2701)) as sock:
-        for cmd in cmds:
-            cmd_str = "irmp send {} {} 00\n".format(prot,cmd)
-            sock.send(bytes(cmd_str,"utf-8"))
+    for cmd in cmds:
+        cmd_queue.put((prot, cmd))
+
+COMMAND_TIMEOUT = 0.1 #timeout between actual sent IR commands
+RECONNECTION_TIMEOUT = 30 #timeout between reconnections of the socket to the IR interface
+ECMD_HOST = "ir.bingo"
+ECMD_PORT = 2701
+def consume_tasks():
+    while True:
+        try:
+            sock = socket.create_connection((ECMD_HOST,ECMD_PORT))
+            while True:
+                tupl = cmd_queue.get()
+                prot, cmd = tupl
+                cmd_str = "irmp send {} {} 00\n".format(prot,cmd)
+                sock.send(bytes(cmd_str,"utf-8"))
+                time.sleep(COMMAND_TIMEOUT)
+        except (ConnectionRefusedError, BrokenPipeError, socket.gaierror):
+            time.sleep(RECONNECTION_TIMEOUT)
+
+worker_thread = threading.Thread(target=consume_tasks, daemon=True)
+worker_thread.start()
