@@ -44,7 +44,8 @@ def make_it_so():
     dev = devices["Amplifier"]
     prot = dev["prot"]
     cmds = dev["commands"]
-    enqueue_cmds(prot, cmds["ON/OFF"], cmds["DVD"], *[cmds["VOLUME UP"]]*15)
+    enqueue_cmds(prot, cmds["ON/OFF"], *[cmds["VOLUME UP"]]*15)
+    enqueue_cmds(prot, cmds["DVD"])
 
 
 cmd_queue = queue.Queue()
