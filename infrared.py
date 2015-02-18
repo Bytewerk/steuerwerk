@@ -60,6 +60,7 @@ RECONNECTION_TIMEOUT = 30 #timeout between reconnections of the socket to the IR
 ECMD_HOST = "ir.bingo"
 ECMD_PORT = 2701
 def consume_tasks():
+    sock = None
     while True:
         try:
             sock = socket.create_connection((ECMD_HOST,ECMD_PORT))
@@ -70,6 +71,7 @@ def consume_tasks():
                 sock.send(bytes(cmd_str,"utf-8"))
                 time.sleep(COMMAND_TIMEOUT)
         except (ConnectionRefusedError, BrokenPipeError, socket.gaierror):
+            sock = None
             time.sleep(RECONNECTION_TIMEOUT)
 
 worker_thread = threading.Thread(target=consume_tasks, daemon=True)
