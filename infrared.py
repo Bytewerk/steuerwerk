@@ -11,6 +11,8 @@ import collections
 import queue
 import threading
 import time
+import traceback
+import sys
 
 CMDS_FILE = "ircodes.json"
 devices = None
@@ -54,25 +56,33 @@ def enqueue_cmds(prot,*cmds):
     """ Send the specified infrared commands. """
     for cmd in cmds:
         cmd_queue.put((prot, cmd))
+    #print("queue size: {}".format(cmd_queue.qsize()))
 
 COMMAND_TIMEOUT = 0.1 #timeout between actual sent IR commands
-RECONNECTION_TIMEOUT = 30 #timeout between reconnections of the socket to the IR interface
+RECONNECTION_TIMEOUT = 1 #timeout between reconnections of the socket to the IR interface
+socket.setdefaulttimeout(RECONNECTION_TIMEOUT) # set timeout for new socket objects
 ECMD_HOST = "ir.bingo"
 ECMD_PORT = 2701
 def consume_tasks():
     sock = None
     while True:
         try:
-            sock = socket.create_connection((ECMD_HOST,ECMD_PORT))
+            #print("will now create socket")
+            sock = socket.create_connection((ECMD_HOST,ECMD_PORT),RECONNECTION_TIMEOUT)
+            #print("created socket: {}".format(sock))
             while True:
                 tupl = cmd_queue.get()
                 prot, cmd = tupl
                 cmd_str = "irmp send {} {} 00\n".format(prot,cmd)
                 sock.send(bytes(cmd_str,"utf-8"))
+                #print("sending {} via {}".format(cmd_str, sock))
                 time.sleep(COMMAND_TIMEOUT)
-        except (ConnectionRefusedError, BrokenPipeError, socket.gaierror):
+        except (ConnectionRefusedError, ConnectionResetError, BrokenPipeError, socket.gaierror):
+            sock.close()
             sock = None
             time.sleep(RECONNECTION_TIMEOUT)
+            traceback.print_exc(file=sys.stdout)
+    #print("consume_tasks() exited")
 
 worker_thread = threading.Thread(target=consume_tasks, daemon=True)
 worker_thread.start()
