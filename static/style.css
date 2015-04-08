@@ -29,6 +29,12 @@ a {
 	margin-bottom: 0.2em;
 }
 
+@media only screen and (max-width: 320px) {
+	.button{
+		min-width: 100%;
+	}
+}
+
 noscript {
 	font-size: 0.8em;
 }
