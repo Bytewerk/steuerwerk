@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Leuchtschild</title>
+		<link rel="stylesheet" type="text/css" href="/static/style.css" />
+	</head>
+	<body>
+		<div class="main-container">
+			<h1>Leuchtschild</h1>
+			<select class="button" >
+				{% for function in functions %}
+				<option class="button" value="{{function}}">{{function}}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</body>
+</html>

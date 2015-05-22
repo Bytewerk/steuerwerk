@@ -45,6 +45,9 @@ noscript {
 
 .nobullets {
 	list-style-type: none;
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+	padding: 0.4em 0.6em;
 }
 
 .main-container {
