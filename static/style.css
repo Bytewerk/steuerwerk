@@ -8,6 +8,7 @@
 html {
 	background: #202020;
 	color: #FFFFFF;
+	font-family: sans;
 }
 
 h1, h2, h3 {
@@ -29,29 +30,43 @@ a {
 	margin-bottom: 0.2em;
 }
 
+.button:hover {
+	background: #617BE3;
+}
+
+li a.button, label.button {
+	display: inline-block;
+}
+
+input[type="radio"]:checked + label.button {
+	background: #27315b;
+}
+
 @media only screen and (max-width: 320px) {
 	.button{
 		min-width: 100%;
 	}
 }
 
+input[type="color"] {
+	margin-left: 1em;
+	padding: 0em;
+}
+
+.hidden {
+	display: none;
+}
+
 noscript {
 	font-size: 0.8em;
 }
 
-.button:hover {
-	background: #617BE3;
-}
-
 .nobullets {
 	list-style-type: none;
-	margin-top: 0.4em;
-	margin-bottom: 0.4em;
-	padding: 0.4em 0.6em;
 }
 
 .main-container {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 40em;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 40em;
 }

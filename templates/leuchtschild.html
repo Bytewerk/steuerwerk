@@ -7,11 +7,27 @@
 	<body>
 		<div class="main-container">
 			<h1>Leuchtschild</h1>
-			<select class="button" >
-				{% for function in functions %}
-				<option class="button" value="{{function}}">{{function}}</option>
+			<h2>Select pattern or set color</h2>
+			<form method="POST" action="" target="_self">
+			<ul>
+				{% for pattern in patterns %}
+				<li class="nobullets">
+					<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}"/>
+					<label for="{{pattern}}" class="button"> {{pattern}} </label>
+				</li>
 				{% endfor %}
-			</select>
+				<li class="nobullets">
+					<input type="radio" class="hidden" name="pattern" id="customcolor" value="custom color"/>
+					<label for="customcolor" class="button">
+						custom color
+						<input name="customcolor" type="color">
+					</label>
+				</li>
+				<li class="nobullets">
+					<input class="button" type="submit" value="apply"/>
+				</li>
+			</ul>
+			</form>
 		</div>
 	</body>
 </html>
