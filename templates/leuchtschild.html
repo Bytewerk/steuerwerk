@@ -12,7 +12,7 @@
 			<ul>
 				{% for pattern in patterns %}
 				<li class="nobullets">
-					<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}"/>
+					<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}" />
 					<label for="{{pattern}}" class="button"> {{pattern}} </label>
 				</li>
 				{% endfor %}
@@ -20,11 +20,11 @@
 					<input type="radio" class="hidden" name="pattern" id="customcolor" value="custom color"/>
 					<label for="customcolor" class="button">
 						custom color
-						<input name="customcolor" type="color">
+						<input name="color" type="color">
 					</label>
 				</li>
 				<li class="nobullets">
-					<input class="button" type="submit" value="apply"/>
+					<input class="button" id="applybtn" type="submit" value="apply"/>
 				</li>
 			</ul>
 			</form>
