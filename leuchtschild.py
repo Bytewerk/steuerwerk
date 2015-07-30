@@ -17,15 +17,16 @@ patterns = {
 }
 
 patterns["CSD"].selected = True
-
+custom_color = 0x0;
 
 ctrl_funcs["control Leuchtschild"] = "leuchtschild"
 @app.route('/leuchtschild/',methods=["GET","POST"])
 def show_sign():
 	if request.form:
 		pattern = request.form["pattern"]
-		color = request.form["color"]
-	return render_template("leuchtschild.html",patterns=patterns)
+		global custom_color
+		custom_color = request.form["color"]
+	return render_template("leuchtschild.html",patterns=patterns,custom_color=custom_color)
 
 ## TODO ##
 # Indicate currently active pattern in web interface
