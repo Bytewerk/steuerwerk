@@ -12,8 +12,8 @@ def show_index():
     """ Show an index of available steuerwerk functionality. """
     return render_template("index.html", appname="steuerwerk", ctrl_funcs=ctrl_funcs)
 
-from infrared import *
-from leuchtschild import *
+from modules.infrared import *
+from modules.leuchtschild import *
 
 if __name__ == "__main__":
     app.run()
