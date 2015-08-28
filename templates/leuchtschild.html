@@ -12,17 +12,15 @@
 			<ul>
 				{% for pattern in patterns %}
 				<li class="nobullets">
-					<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}" />
-					<label for="{{pattern}}" class="button"> {{pattern}} </label>
-				</li>
-				{% endfor %}
-				<li class="nobullets">
-					<input type="radio" class="hidden" name="pattern" id="customcolor" value="custom color"/>
-					<label for="customcolor" class="button">
-						custom color
-						<input name="color" type="color" value="{{custom_color}}"/>
+					<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}" {% if pattern == active_pattern %}checked="true"{% endif %} />
+					<label for="{{pattern}}" class="button">
+						{{pattern}}
+						{% if pattern == "custom color" %}
+							<input name="color" type="color" value="{{custom_color}}"/>
+						{% endif %}
 					</label>
 				</li>
+				{% endfor %}
 				<li class="nobullets">
 					<input class="button" id="applybtn" type="submit" value="apply"/>
 				</li>
