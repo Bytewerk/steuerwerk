@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{{appname}}</title>
-		<link href="static/style.css" rel="stylesheet" type="text/css" />
-	</head>
-	<body>
-		<div class="main-container">
-				<h1>Bytewerk house bus control</h1>
-				<ul class="nobullets">
-					{% for key,value in ctrl_funcs.items() %}
-						<li>
-							<a href="/{{value}}" class="button">
-								{{key}}
-							</a>
-						</li>
-					{% endfor %}
-				</ul>
-		</div>
-	</body>
-</html>
+{% extends "base.html" %}
+{% block body %}
+	<h1>Bytewerk house bus control</h1>
+	<ul class="nobullets">
+		{% for key,value in ctrl_funcs.items() %}
+			<li>
+				<a href="/{{value}}" class="button">
+					{{key}}
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>send IR commands</title>
-		<link rel="stylesheet" type="text/css" href="/static/style.css" />
-	</head>
-	<body>
-	<div class="main-container">
-		<h1>Send IR commands</h1>
-		{% for device,attributes in devices.items() %}
-			<h2>{{device}}</h2>
-			<form method="POST" action="/ir/{{device}}" target="_self">
-			{% for cmds in attributes['commands'] %}
-				{% for cmd in cmds.keys() %}
-					<input class="button" type="submit" name="cmd" value="{{cmd}}" />
-				{% endfor %}
-				<br>
+{% extends "base.html" %}
+{% block title %} send IR commands {% endblock %}
+{% block body %}
+	<h1>Send IR commands</h1>
+	{% for device,attributes in devices.items() %}
+		<h2>{{device}}</h2>
+		<form method="POST" action="/ir/{{device}}" target="_self">
+		{% for cmds in attributes['commands'] %}
+			{% for cmd in cmds.keys() %}
+				<input class="button" type="submit" name="cmd" value="{{cmd}}" />
 			{% endfor %}
-			</form>
+			<br>
 		{% endfor %}
-		<noscript>
-			This site works without JavaScript, but some JS code makes button presses work without reloading.
-			Please consider enabling JS if you wish that your button presses worked a lot more swiftly.
-		</noscript>
-	</div>
+		</form>
+	{% endfor %}
+	<noscript>
+		This site works without JavaScript, but some JS code makes button presses work without reloading.
+		Please consider enabling JS if you wish that your button presses worked a lot more swiftly.
+	</noscript>
 	<script type="text/javascript" src="/static/ir.js" ></script>
-	</body>
-</html>
+{% endblock %}

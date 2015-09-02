@@ -1,31 +1,24 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Leuchtschild</title>
-		<link rel="stylesheet" type="text/css" href="/static/style.css" />
-	</head>
-	<body>
-		<div class="main-container">
-			<h1>Leuchtschild</h1>
-			<h2>Select pattern or set color</h2>
-			<form method="POST" action="" target="_self">
-			<ul>
-				{% for pattern in patterns %}
-				<li class="nobullets">
-					<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}" {% if pattern == active_pattern %}checked="true"{% endif %} />
-					<label for="{{pattern}}" class="button">
-						{{pattern}}
-						{% if pattern == "custom color" %}
-							<input name="color" type="color" value="{{custom_color}}"/>
-						{% endif %}
-					</label>
-				</li>
-				{% endfor %}
-				<li class="nobullets">
-					<input class="button" id="applybtn" type="submit" value="apply"/>
-				</li>
-			</ul>
-			</form>
-		</div>
-	</body>
-</html>
+{% extends "base.html" %}
+{% block title %} Leuchtschild {% endblock %}
+{% block body %}
+	<h1>Leuchtschild</h1>
+	<h2>Select pattern or set color</h2>
+	<form method="POST" action="" target="_self">
+	<ul>
+		{% for pattern in patterns %}
+		<li class="nobullets">
+			<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}" {% if pattern == active_pattern %}checked="true"{% endif %} />
+			<label for="{{pattern}}" class="button">
+				{{pattern}}
+				{% if pattern == "custom color" %}
+					<input name="color" type="color" value="{{custom_color}}"/>
+				{% endif %}
+			</label>
+		</li>
+		{% endfor %}
+		<li class="nobullets">
+			<input class="button" id="applybtn" type="submit" value="apply"/>
+		</li>
+	</ul>
+	</form>
+{% endblock %}
