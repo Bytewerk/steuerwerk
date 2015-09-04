@@ -7,7 +7,7 @@
 	<ul>
 		{% for id, name in patterns.items() %}
 		<li class="nobullets">
-			<input type="radio" class="hidden" id="{{id}}" name="pattern" value="{{pattern}}" {% if id == active_pattern %}checked="true"{% endif %} />
+			<input type="radio" class="hidden" id="{{id}}" name="pattern" value="{{id}}" {% if id == active_pattern %}checked="checked"{% endif %} />
 			<label for="{{id}}" class="button">
 				{{name}}
 				{% if name == "custom color" %}
