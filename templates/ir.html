@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %} send IR commands {% endblock %}
+{% block h1%} Send IR commands {% endblock %}
 {% block body %}
-	<h1>Send IR commands</h1>
 	{% for device,attributes in devices.items() %}
 		<h2>{{device}}</h2>
 		<form method="POST" action="/ir/{{device}}" target="_self">

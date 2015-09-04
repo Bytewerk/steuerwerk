@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block title %} Leuchtschild {% endblock %}
+{% block h1 %}Leuchtschild{% endblock %}
 {% block body %}
-	<h1>Leuchtschild</h1>
 	<h2>Select pattern or set color</h2>
 	<form method="POST" action="" target="_self">
 	<ul>
-		{% for pattern in patterns %}
+		{% for id, name in patterns.items() %}
 		<li class="nobullets">
-			<input type="radio" class="hidden" id="{{pattern}}" name="pattern" value="{{pattern}}" {% if pattern == active_pattern %}checked="true"{% endif %} />
-			<label for="{{pattern}}" class="button">
-				{{pattern}}
-				{% if pattern == "custom color" %}
+			<input type="radio" class="hidden" id="{{id}}" name="pattern" value="{{pattern}}" {% if id == active_pattern %}checked="true"{% endif %} />
+			<label for="{{id}}" class="button">
+				{{name}}
+				{% if name == "custom color" %}
 					<input name="color" type="color" value="{{custom_color}}"/>
 				{% endif %}
 			</label>
