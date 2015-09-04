@@ -20,6 +20,10 @@ a {
 	text-decoration: none;
 }
 
+a#indexlink {
+	color: #3D4E8F;
+}
+
 .button {
 	padding: 0.4em 0.6em;
 	background: #3D4E8F;

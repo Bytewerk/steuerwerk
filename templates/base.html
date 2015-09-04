@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block head %}
+	<link rel="stylesheet" href="/static/style.css" />
+	<link rel="icon" href="/static/favicon.png" />
+	<title> steuerwerk {% block title %}{% endblock %} </title>
+	{% endblock %}
+	<body>
+		<h1><a id="indexlink" href="/">steuerwerk</a> • {% block h1 %}{% endblock %} </h1>
+		<div class="main-container">
+			{% block body %}
+			{% endblock %}
+		</div>
+	</body>
+</head>
