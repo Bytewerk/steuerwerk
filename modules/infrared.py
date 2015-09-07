@@ -11,8 +11,9 @@ import collections
 import time
 import traceback
 import sys
+import os
 
-CMDS_FILE = "ircodes.json"
+CMDS_FILE = os.path.dirname(os.path.abspath(__file__)) + "/../ircodes.json"
 devices = None
 with open(CMDS_FILE) as cmds_file:
 	devices_raw = json.load(cmds_file, object_pairs_hook=collections.OrderedDict)
